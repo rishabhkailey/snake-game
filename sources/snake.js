@@ -36,6 +36,8 @@ class SankeGame {
 
             displayGame.appendChild(displayRow)
         })
+        displayGame.style.border = '1px solid black'
+        displayGame.style.width = '403px'
         document.body.appendChild(displayGame)
     
         this.blocks = document.getElementsByClassName('block');
