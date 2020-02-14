@@ -204,7 +204,7 @@ class SankeGame {
         return true
 
     }
-    
+
     updateSnakePosition = ()=>{
         
         if(!this.move)
