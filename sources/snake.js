@@ -1,3 +1,6 @@
+
+let wall = false
+
 class SankeGame {
     constructor() {
         this.updateSnakePosition = this.updateSnakePosition.bind(this)
@@ -39,7 +42,7 @@ class SankeGame {
         displayGame.style.border = '1px solid black'
         displayGame.style.width = '403px'
         document.body.appendChild(displayGame)
-    
+        
         this.blocks = document.getElementsByClassName('block');
     }
 
@@ -96,6 +99,13 @@ class SankeGame {
             x = x+1;
         }
         
+        if(!wall && (x >= this.rows || x < 0 || y >= this.cols || y < 0)){
+            // this.gameover()
+            // return false
+            x = (x+20)%20;
+            y = (y+20)%20;
+        }
+
         return {x,y}
     }
 
@@ -191,7 +201,7 @@ class SankeGame {
         let {x,y} = this.getNewPosition(this.snake.head);
         
 
-        if(x >= this.rows || x < 0 || y >= this.cols || y < 0){
+        if(wall && (x >= this.rows || x < 0 || y >= this.cols || y < 0) ){
             this.gameover()
             return false
         }
@@ -290,6 +300,27 @@ gameObject.displayGame()
 gameObject.startGame()
 
 document.onkeydown = checkKey;
+
+var checkbox = document.createElement('input');
+checkbox.type = 'checkbox'
+checkbox.id = 'vehicle1'
+checkbox.addEventListener('click',changeWall)
+var label = document.createElement('label')
+label.innerHTML = 'solid wall'
+
+var div = document.createElement('div')
+div.appendChild(checkbox)
+div.appendChild(label)
+
+document.body.appendChild(div);
+
+function changeWall() {
+    wall = checkbox.checked
+}
+
+function fxn(e){
+    alert(checkbox.checked)
+}
 
 function checkKey(e) {
 
